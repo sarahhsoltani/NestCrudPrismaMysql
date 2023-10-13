@@ -13,27 +13,27 @@ datasource db {
 //Create Model User && TASK
 
 model User{
-  id               Int     @default(autoincrement()) @id
+  id               Int                @default(autoincrement()) @id
   name             String
-  email            String
+  email            String             @unique
   password         String
   image            String?
-  role             Role @default(USER)
+  role             Role               @default(USER)
   birthday         DateTime
   createdAt        DateTime           @default(now())
   updatedAt        DateTime           @updatedAt
-  task             Task[]  //chaque utilisateur a un ensemeble des tasks
+  task             Task[]             //chaque utilisateur a un ensemeble des tasks
 }
 model Task{
-  id               Int     @default(autoincrement()) @id
-  //title String? c'zt pas obligatoire && @default("sss")
+  id               Int               @default(autoincrement()) @id
+  //title String? c'est pas obligatoire && @default("sss")
   title            String
   description      String
   statut           String
   createdAt        DateTime           @default(now())
   updatedAt        DateTime           @updatedAt
   userId           Int?
-  user          User?    @relation(fields: [userId], references: [id])
+  user             User?              @relation(fields: [userId], references: [id])
 }
 enum Role {
   USER 
